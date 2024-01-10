@@ -30,5 +30,24 @@ with open(csvpath) as csvfile:
     csv_header = next(csvreader)
     print(f'CSV Header: {csv_header}')
 
+    #Create a counter to sum the months.
+    total_months = 0
+    #Create a counter to sum the net Profit/Loss.
+    net_total = 0
+
     for row in csvreader:
-        print(row)
+        total_months = total_months + 1
+        
+        net_total = net_total + int(row[1])
+
+    
+
+    #Print the Analysis in the format requested!
+        
+    print("Financial Analysis")
+
+    print("----------------------------")    
+    
+    print(f'Total Months: {total_months}')
+
+    print(f'total ${net_total}')
