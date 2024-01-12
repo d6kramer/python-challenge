@@ -38,9 +38,9 @@ with open(csvpath) as csvfile:
     # Create an empty list to record each value of change during the loop.
     pl_list = []
 
-    date_list = []
+    greatest_increase = []
 
-    full_list = []
+    greatest_decrease = []
 
     # Loop through the data to capture needed values:
     for row in csvreader:
@@ -52,18 +52,28 @@ with open(csvpath) as csvfile:
         pl_change = (int(row[1]) - int(pl_change))
     #...Which we can then add to our list of Profit/Loss changes!
         pl_list.append(pl_change)
+
+        if max(pl_list) == pl_change:
+
+            greatest_increase.clear()
+            
+            greatest_increase.append(row[0])
+
+        elif min(pl_list) == pl_change:
+
+            greatest_decrease.clear()
+
+            greatest_decrease.append(row[0])
+
     # After calculating the difference, reset the pl_change variable at the end of each loop to be
     # the correct value so the loop calculates an accurate difference from the next row.
         pl_change = (row[1])
-
-        date_list.append(row[0])
-
-        full_list.append(row)
 
 
     # After the loop completes, the first entry added to the list is technically inaccurate (it adds
     # a value that wasn't subtracted from anything), so it needs to be removed from the list via the pop function.
     pl_list.pop(0)
+
 
     # Create a variable that holds the average of the Profit/Loss values from the list.
     pl_total = sum(pl_list)/len(pl_list)
@@ -76,29 +86,29 @@ with open(csvpath) as csvfile:
     
     print(f'Total Months: {total_months}')
 
-    print(f'total ${net_total}')
+    print(f'Total: ${net_total}')
 
     
     # When printing the average Profit/Loss, the expected format is rounded to two decimal places, 
     # which requires the round function.
-    print(round(pl_total,2))
+    print(f'Average Change: ${round(pl_total,2)}')
 
+    max = max(pl_list)
 
-    max = int(max(pl_list))
+    min = min(pl_list)
 
-    min = int(min(pl_list))
+    increase = greatest_increase[0]
 
-    print(max)
+    decrease = greatest_decrease[0]
 
-    print(min)
+    print(f'Greatest Increase in Profits: {increase} (${max})')
 
-    print(date_list)
+    print(f'Greatest Decrease in Profits: {decrease} (${min})')
 
-    for row in full_list:
-
-        if row == (str(date_list), int(max)):
     
-            print("Hello")
+
+
+
 
             
             #print(f'{1- (row[0])} (${row[1]})')
