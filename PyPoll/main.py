@@ -126,7 +126,7 @@ with open(csvpath) as csvfile:
     election = open(file, "w")
 
     # The remaining lines of code are identical to the lines I printed
-    # in the program results, with two main differences: 1. instead of
+    # in the program results, with two main differences: 1. Instead of
     # printing, it uses the write command in relation to the election file.
     # 2. To assist with making the resulting file legible, I added \n to
     # each string, which tells the program to write a new line during each 
